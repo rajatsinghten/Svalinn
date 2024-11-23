@@ -1,174 +1,245 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SecureOps</title>
+  <meta charset="UTF-8">
   <style>
     body {
+      width: 350px;
+      min-height: 400px;
+      margin: 0;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      width: 300px;
-      background-color: #f9f9f9;
+      background: #f5f5f5;
     }
-    h1 {
-      font-size: 1.2rem;
-      margin: 0;
-      padding: 10px;
-      text-align: center;
-      background-color: #007bff;
-      color: white;
+
+    #app-container {
+      height: 100%;
     }
-    .container {
-      padding: 15px;
+
+    /* Registration Page Styles */
+    .registration-page {
+      padding: 20px;
+      display: none;
     }
-    label {
-      font-size: 0.9rem;
-      margin-bottom: 5px;
+
+    .registration-page.active {
       display: block;
     }
-    input {
-      width: calc(100% - 20px);
-      padding: 8px 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+
+    .form-group {
+      margin-bottom: 15px;
     }
-    button {
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input {
       width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      background-color: #007bff;
-      color: white;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .sites-list {
-      margin-top: 15px;
-    }
-    .site-item {
       padding: 8px;
       border: 1px solid #ddd;
       border-radius: 4px;
-      margin-bottom: 5px;
+      box-sizing: border-box;
+    }
+
+    /* Login Page Styles */
+    .login-page {
+      padding: 20px;
+      display: none;
+    }
+
+    .login-page.active {
+      display: block;
+    }
+
+    /* Dashboard Page Styles */
+    .dashboard-page {
+      padding: 20px;
+      display: none;
+    }
+
+    .dashboard-page.active {
+      display: block;
+    }
+
+    .user-info {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .user-info h3 {
+      margin: 0 0 5px 0;
+      color: #333;
+    }
+
+    .user-info p {
+      margin: 0;
+      color: #666;
+    }
+
+    .site-list {
+      margin: 15px 0;
+    }
+
+    .site-item {
+      background: white;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 4px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
-    .site-item span {
-      font-size: 0.9rem;
+
+    .site-item .site-url {
+      flex-grow: 1;
+      margin-right: 10px;
     }
-    .remove-btn {
-      background: none;
+
+    .site-controls {
+      display: flex;
+      gap: 5px;
+    }
+
+    .btn {
+      padding: 8px 12px;
       border: none;
-      color: #d9534f;
-      font-size: 1rem;
+      border-radius: 4px;
       cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
     }
-    .remove-btn:hover {
-      color: #c9302c;
+
+    .btn-primary {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #45a049;
+    }
+
+    .btn-secondary {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e0e0e0;
+    }
+
+    .btn-danger {
+      background-color: #ff4444;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #ee3333;
+    }
+
+    .add-site-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .add-site-form input {
+      flex-grow: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .settings-section {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
+    }
+
+    .error-message {
+      color: #ff4444;
+      margin-top: 5px;
+      font-size: 12px;
+      display: none;
+    }
+
+    .success-message {
+      color: #4CAF50;
+      margin-top: 5px;
+      font-size: 12px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>SecureOps</h1>
-  <div class="container">
-    <label for="siteInput">Add a Website to Lock</label>
-    <input type="text" id="siteInput" placeholder="Enter site URL (e.g., example.com)" />
-    <button id="addSiteBtn">Add Site</button>
-    <div class="sites-list">
-      <h3>Locked Sites:</h3>
-      <div id="sitesContainer">
-        <!-- List of locked sites will be displayed here -->
+  <div id="app-container">
+    <!-- Registration Page -->
+    <div id="registration-page" class="registration-page">
+      <h2>Register Extension</h2>
+      <form id="registration-form">
+        <div class="form-group">
+          <label for="reg-name">Name</label>
+          <input type="text" id="reg-name" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-designation">Designation</label>
+          <input type="text" id="reg-designation" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Master Password</label>
+          <input type="password" id="reg-password" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-confirm-password">Confirm Password</label>
+          <input type="password" id="reg-confirm-password" required>
+        </div>
+        <div class="error-message" id="reg-error"></div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="login-page">
+      <h2>Login</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-password">Master Password</label>
+          <input type="password" id="login-password" required>
+        </div>
+        <div class="error-message" id="login-error"></div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="dashboard-page">
+      <div class="user-info">
+        <h3 id="user-name">Loading...</h3>
+        <p id="user-designation">Loading...</p>
+      </div>
+
+      <div class="add-site-form">
+        <input type="text" id="new-site-url" placeholder="Enter website URL">
+        <button id="add-site-btn" class="btn btn-primary">Add</button>
+      </div>
+
+      <div id="site-list" class="site-list">
+        <!-- Sites will be added here dynamically -->
+      </div>
+
+      <div class="settings-section">
+        <button id="change-password-btn" class="btn btn-secondary">Change Password</button>
+        <button id="logout-btn" class="btn btn-danger">Logout</button>
       </div>
     </div>
-    <label for="passwordInput">Set Master Password</label>
-    <input type="password" id="passwordInput" placeholder="Enter new master password" />
-    <button id="setPasswordBtn">Set Password</button>
   </div>
-
-  <script>
-    const siteInput = document.getElementById('siteInput');
-    const addSiteBtn = document.getElementById('addSiteBtn');
-    const sitesContainer = document.getElementById('sitesContainer');
-    const passwordInput = document.getElementById('passwordInput');
-    const setPasswordBtn = document.getElementById('setPasswordBtn');
-
-    // Load existing locked sites and display them
-    chrome.storage.local.get(['lockedSites'], (result) => {
-      if (result.lockedSites) {
-        result.lockedSites.forEach(addSiteToList);
-      }
-    });
-
-    // Add a site to the list and save it
-    addSiteBtn.addEventListener('click', () => {
-      const site = siteInput.value.trim();
-      if (site) {
-        chrome.storage.local.get(['lockedSites'], (result) => {
-          const lockedSites = result.lockedSites || [];
-          if (!lockedSites.includes(site)) {
-            lockedSites.push(site);
-            chrome.storage.local.set({ lockedSites }, () => {
-              addSiteToList(site);
-              siteInput.value = '';
-            });
-          } else {
-            alert('Site already locked!');
-          }
-        });
-      }
-    });
-
-    // Remove a site from the list
-    function removeSite(site) {
-      chrome.storage.local.get(['lockedSites'], (result) => {
-        const lockedSites = result.lockedSites || [];
-        const updatedSites = lockedSites.filter((lockedSite) => lockedSite !== site);
-        chrome.storage.local.set({ lockedSites: updatedSites }, () => {
-          loadSites();
-        });
-      });
-    }
-
-    // Add site to the display list
-    function addSiteToList(site) {
-      const siteItem = document.createElement('div');
-      siteItem.classList.add('site-item');
-      siteItem.innerHTML = `
-        <span>${site}</span>
-        <button class="remove-btn" title="Remove this site">&times;</button>
-      `;
-      siteItem.querySelector('.remove-btn').addEventListener('click', () => removeSite(site));
-      sitesContainer.appendChild(siteItem);
-    }
-
-    // Reload the site list
-    function loadSites() {
-      sitesContainer.innerHTML = '';
-      chrome.storage.local.get(['lockedSites'], (result) => {
-        if (result.lockedSites) {
-          result.lockedSites.forEach(addSiteToList);
-        }
-      });
-    }
-
-    // Set the master password
-    setPasswordBtn.addEventListener('click', () => {
-      const newPassword = passwordInput.value.trim();
-      if (newPassword) {
-        chrome.storage.local.set({ masterPassword: newPassword }, () => {
-          alert('Master password updated successfully!');
-          passwordInput.value = '';
-        });
-      } else {
-        alert('Please enter a valid password!');
-      }
-    });
-  </script>
+  <script src="utils.js"></script>
+  <script src="popup.js"></script>
 </body>
 </html>

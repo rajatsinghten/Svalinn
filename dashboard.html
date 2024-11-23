@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .user-info {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .site-list {
+      margin: 15px 0;
+    }
+    .site-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+      padding: 5px;
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .settings {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="user-info">
+    <h3 id="userName">Name</h3>
+    <p id="userDesignation">Designation</p>
+  </div>
+  
+  <div>
+    <input type="text" id="newSite" placeholder="Enter website URL">
+    <button id="addSite">Add Site</button>
+  </div>
+  
+  <div class="site-list" id="siteList"></div>
+  
+  <div class="settings">
+    <button id="changePassword">Change Master Password</button>
+    <button id="logout">Logout</button>
+  </div>
+  
+  <script src="dashboard.js"></script>
+</body>
+</html>

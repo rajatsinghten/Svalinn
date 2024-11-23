@@ -1,22 +1,25 @@
 {
-    "manifest_version": 3,
-    "name": "SecureOps",
-    "version": "1.0",
-    "description": "Password protect access to any website",
-    "permissions": ["storage", "activeTab", "scripting"],
-    "host_permissions": ["<all_urls>"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "action": {
-      "default_popup": "popup.html",
-      "default_title": "Website Password Lock"
-    },
-    "web_accessible_resources": [
-      {
-        "resources": ["locked_page.html"],
-        "matches": ["<all_urls>"]
-      }
-    ]
-  }
-  
+  "manifest_version": 2,
+  "name": "Website Password Lock",
+  "version": "1.0",
+  "description": "Password protect access to specified websites",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Website Password Lock"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    
+    "js": ["content.js"],
+    "run_at": "document_start"
+  }]
+}
