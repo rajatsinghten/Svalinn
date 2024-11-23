@@ -1,9 +1,8 @@
 let lockedSites = [];
 let masterPassword = "1234";
 
-// Load locked sites from storage immediately
-chrome.storage.local.get(['lockedSites', 'masterPassword'], function(result) {
-  console.log('Loaded sites:', result.lockedSites); // Debug log
+// Load locked sites and password on startup
+chrome.storage.local.get(['lockedSites', 'masterPassword'], (result) => {
   if (result.lockedSites) {
     lockedSites = result.lockedSites;
   }
@@ -12,36 +11,34 @@ chrome.storage.local.get(['lockedSites', 'masterPassword'], function(result) {
   }
 });
 
-// Listen for messages
+// Listen for messages from content scripts or popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log('Received message:', request); // Debug log
-
   if (request.action === "ADD_SITE") {
     lockedSites.push(request.site);
-    chrome.storage.local.set({ lockedSites: lockedSites });
-    console.log('Updated locked sites:', lockedSites); // Debug log
+    chrome.storage.local.set({ lockedSites });
     sendResponse({ success: true });
-  }
-  else if (request.action === "REMOVE_SITE") {
+  } else if (request.action === "REMOVE_SITE") {
     lockedSites = lockedSites.filter(site => site !== request.site);
-    chrome.storage.local.set({ lockedSites: lockedSites });
-    console.log('Updated locked sites:', lockedSites); // Debug log
+    chrome.storage.local.set({ lockedSites });
     sendResponse({ success: true });
-  }
-  else if (request.action === "GET_SITES") {
+  } else if (request.action === "GET_SITES") {
     sendResponse({ sites: lockedSites });
-  }
-  else if (request.action === "CHECK_SITE") {
-    const url = new URL(request.url);
-    const hostname = url.hostname;
-    console.log('Checking hostname:', hostname); // Debug log
-    console.log('Against locked sites:', lockedSites); // Debug log
-    const isLocked = lockedSites.some(site => hostname.includes(site));
-    console.log('Is locked:', isLocked); // Debug log
-    sendResponse({ isLocked });
-  }
-  else if (request.action === "CHECK_PASSWORD") {
+  } else if (request.action === "CHECK_PASSWORD") {
     sendResponse({ isCorrect: request.password === masterPassword });
   }
-  return true;  // Required for async response
+  return true; // Indicate asynchronous response
 });
+
+// Inject the locked page when a site is matched
+chrome.webNavigation.onCompleted.addListener((details) => {
+  const url = new URL(details.url);
+  const hostname = url.hostname;
+
+  const isLocked = lockedSites.some((site) => hostname.includes(site));
+  if (isLocked) {
+    chrome.scripting.executeScript({
+      target: { tabId: details.tabId },
+      files: ["inject_locked_page.js"]
+    });
+  }
+}, { url: [{ urlMatches: ".*" }] });

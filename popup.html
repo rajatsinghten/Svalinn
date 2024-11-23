@@ -1,28 +1,174 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>SecureOps</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
       width: 300px;
-      padding: 10px;
+      background-color: #f9f9f9;
     }
-    .site-list {
-      margin-top: 10px;
+    h1 {
+      font-size: 1.2rem;
+      margin: 0;
+      padding: 10px;
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+    }
+    .container {
+      padding: 15px;
+    }
+    label {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      display: block;
+    }
+    input {
+      width: calc(100% - 20px);
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .sites-list {
+      margin-top: 15px;
     }
     .site-item {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 5px;
       display: flex;
       justify-content: space-between;
-      margin: 5px 0;
+      align-items: center;
+      background-color: #fff;
+    }
+    .site-item span {
+      font-size: 0.9rem;
+    }
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #d9534f;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      color: #c9302c;
     }
   </style>
 </head>
 <body>
-  <h2>Website Password Lock</h2>
-  <div>
-    <input type="text" id="siteInput" placeholder="Enter website (e.g., facebook.com)">
-    <button id="addSite">Add Site</button>
+  <h1>SecureOps</h1>
+  <div class="container">
+    <label for="siteInput">Add a Website to Lock</label>
+    <input type="text" id="siteInput" placeholder="Enter site URL (e.g., example.com)" />
+    <button id="addSiteBtn">Add Site</button>
+    <div class="sites-list">
+      <h3>Locked Sites:</h3>
+      <div id="sitesContainer">
+        <!-- List of locked sites will be displayed here -->
+      </div>
+    </div>
+    <label for="passwordInput">Set Master Password</label>
+    <input type="password" id="passwordInput" placeholder="Enter new master password" />
+    <button id="setPasswordBtn">Set Password</button>
   </div>
-  <div class="site-list" id="siteList"></div>
-  <script src="popup.js"></script>
+
+  <script>
+    const siteInput = document.getElementById('siteInput');
+    const addSiteBtn = document.getElementById('addSiteBtn');
+    const sitesContainer = document.getElementById('sitesContainer');
+    const passwordInput = document.getElementById('passwordInput');
+    const setPasswordBtn = document.getElementById('setPasswordBtn');
+
+    // Load existing locked sites and display them
+    chrome.storage.local.get(['lockedSites'], (result) => {
+      if (result.lockedSites) {
+        result.lockedSites.forEach(addSiteToList);
+      }
+    });
+
+    // Add a site to the list and save it
+    addSiteBtn.addEventListener('click', () => {
+      const site = siteInput.value.trim();
+      if (site) {
+        chrome.storage.local.get(['lockedSites'], (result) => {
+          const lockedSites = result.lockedSites || [];
+          if (!lockedSites.includes(site)) {
+            lockedSites.push(site);
+            chrome.storage.local.set({ lockedSites }, () => {
+              addSiteToList(site);
+              siteInput.value = '';
+            });
+          } else {
+            alert('Site already locked!');
+          }
+        });
+      }
+    });
+
+    // Remove a site from the list
+    function removeSite(site) {
+      chrome.storage.local.get(['lockedSites'], (result) => {
+        const lockedSites = result.lockedSites || [];
+        const updatedSites = lockedSites.filter((lockedSite) => lockedSite !== site);
+        chrome.storage.local.set({ lockedSites: updatedSites }, () => {
+          loadSites();
+        });
+      });
+    }
+
+    // Add site to the display list
+    function addSiteToList(site) {
+      const siteItem = document.createElement('div');
+      siteItem.classList.add('site-item');
+      siteItem.innerHTML = `
+        <span>${site}</span>
+        <button class="remove-btn" title="Remove this site">&times;</button>
+      `;
+      siteItem.querySelector('.remove-btn').addEventListener('click', () => removeSite(site));
+      sitesContainer.appendChild(siteItem);
+    }
+
+    // Reload the site list
+    function loadSites() {
+      sitesContainer.innerHTML = '';
+      chrome.storage.local.get(['lockedSites'], (result) => {
+        if (result.lockedSites) {
+          result.lockedSites.forEach(addSiteToList);
+        }
+      });
+    }
+
+    // Set the master password
+    setPasswordBtn.addEventListener('click', () => {
+      const newPassword = passwordInput.value.trim();
+      if (newPassword) {
+        chrome.storage.local.set({ masterPassword: newPassword }, () => {
+          alert('Master password updated successfully!');
+          passwordInput.value = '';
+        });
+      } else {
+        alert('Please enter a valid password!');
+      }
+    });
+  </script>
 </body>
 </html>
