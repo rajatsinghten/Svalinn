@@ -1,25 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>SecureOps</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Locker</title>
+  <script src="popup.js" defer></script>
 </head>
 <body>
-  <h1>SecureOps</h1>
-
-  <div>
-    <label for="url">Lock a Website:</label>
-    <input type="text" id="url" placeholder="Enter website URL (e.g., https://example.com)" />
-    <button id="lock-site">Lock Website</button>
-  </div>
-
-  <div>
-    <h3>Locked Websites:</h3>
-    <ul id="locked-sites">
-      <!-- Dynamically populated list of locked sites -->
-    </ul>
-  </div>
-
-  <script src="popup.js"></script>
+  <h3>Website Locker</h3>
+  <form id="lockForm">
+    <label for="website">Website URL:</label>
+    <input type="url" id="website" placeholder="Enter website URL (e.g., https://example.com)" required />
+    <button type="submit">Lock Website</button>
+  </form>
+  <p id="status"></p>
 </body>
 </html>
