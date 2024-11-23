@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.getElementById('addSite');
     const siteList = document.getElementById('siteList');
   
-    // Load and display blocked sites
     function loadSites() {
       chrome.runtime.sendMessage({ action: "GET_SITES" }, function(response) {
         siteList.innerHTML = '';
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   
-    // Add new site
     addButton.addEventListener('click', function() {
       const site = siteInput.value.trim();
       if (site) {
@@ -35,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   
-    // Remove site
     siteList.addEventListener('click', function(e) {
       if (e.target.classList.contains('remove-site')) {
         const site = e.target.dataset.site;
@@ -50,6 +47,5 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   
-    // Initial load
     loadSites();
   });

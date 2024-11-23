@@ -2,12 +2,11 @@
     "manifest_version": 2,
     "name": "SecureOps",
     "version": "1.0",
-    "description": "Blocks access to specified websites",
+    "description": "Password protect access to specified websites",
     "permissions": [
-      "webRequest",
-      "webRequestBlocking",
-      "<all_urls>",
-      "storage"
+      "activeTab",
+      "storage",
+      "<all_urls>"
     ],
     "background": {
       "scripts": ["background.js"],
@@ -15,7 +14,11 @@
     },
     "browser_action": {
       "default_popup": "popup.html",
-      "default_title": "Website Blocker"
-    }
+      "default_title": "Website Password Lock"
+    },
+    "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "css": ["overlay.css"],
+      "js": ["content.js"]
+    }]
   }
-  
