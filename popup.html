@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      width: 300px;
+      padding: 10px;
+    }
+    .site-list {
+      margin-top: 10px;
+    }
+    .site-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Website Blocker</h2>
+  <div>
+    <input type="text" id="siteInput" placeholder="Enter website (e.g., facebook.com)">
+    <button id="addSite">Add Site</button>
+  </div>
+  <div class="site-list" id="siteList"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
