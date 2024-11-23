@@ -1,10 +1,13 @@
-
 {
     "manifest_version": 3,
     "name": "SecureOps",
     "version": "1.0",
+    "description": "Lock and secure websites with a master password",
     "permissions": [
       "storage",
+      "history",
+      "cookies",
+      "browsingData",
       "webNavigation",
       "activeTab",
       "scripting"
@@ -30,7 +33,7 @@
     },
     "web_accessible_resources": [
       {
-        "resources": ["registration.html"],
+        "resources": ["registration.html", "blocked.html"],
         "matches": ["<all_urls>"]
       }
     ]
