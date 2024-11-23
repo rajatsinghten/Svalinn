@@ -1,72 +1,52 @@
-function checkAndLockPage() {
-  const currentUrl = window.location.href;
-  
-  chrome.storage.local.get(['lockedSites'], (result) => {
-    const lockedSites = result.lockedSites || [];
-    const isLocked = lockedSites.some(site => currentUrl.includes(site));
-    
-    if (isLocked) {
-      chrome.storage.session.get(['unlockedSites'], (sessionResult) => {
-        const unlockedSites = sessionResult.unlockedSites || [];
-        const isUnlocked = unlockedSites.some(site => currentUrl.includes(site));
-        
-        if (!isUnlocked) {
-          showOverlay();
-        }
-      });
-    }
-  });
-}
+// Create lock overlay
+const overlay = document.createElement("div");
+overlay.id = "web-lock-overlay";
+overlay.style.position = "fixed";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.height = "100%";
+overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+overlay.style.zIndex = "9999";
+overlay.style.display = "flex";
+overlay.style.flexDirection = "column";
+overlay.style.justifyContent = "center";
+overlay.style.alignItems = "center";
+overlay.style.color = "white";
+overlay.style.fontSize = "20px";
 
-chrome.runtime.sendMessage(
-  { type: "checkSite", url: window.location.href },
-  (response) => {
-    if (response && response.isLocked) {
-      createLockOverlay();
-    }
-  }
-);
+const message = document.createElement("p");
+message.textContent = "This website is locked. Enter the password to unlock.";
+overlay.appendChild(message);
 
-function createLockOverlay() {
-  const overlay = document.createElement("div");
-  overlay.style.position = "fixed";
-  overlay.style.top = "0";
-  overlay.style.left = "0";
-  overlay.style.width = "100%";
-  overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-  overlay.style.zIndex = "9999";
-  overlay.style.color = "white";
-  overlay.style.display = "flex";
-  overlay.style.flexDirection = "column";
-  overlay.style.alignItems = "center";
-  overlay.style.justifyContent = "center";
+const input = document.createElement("input");
+input.type = "password";
+input.placeholder = "Enter password";
+input.style.padding = "10px";
+input.style.fontSize = "16px";
+overlay.appendChild(input);
 
-  const message = document.createElement("h1");
-  message.textContent = "This site is locked.";
-  overlay.appendChild(message);
+const button = document.createElement("button");
+button.textContent = "Unlock";
+button.style.marginTop = "10px";
+button.style.padding = "10px 20px";
+button.style.fontSize = "16px";
+button.style.cursor = "pointer";
+overlay.appendChild(button);
 
-  const input = document.createElement("input");
-  input.type = "password";
-  input.placeholder = "Enter password";
-  overlay.appendChild(input);
+document.body.appendChild(overlay);
 
-  const button = document.createElement("button");
-  button.textContent = "Unlock";
-  button.addEventListener("click", () => {
-    const password = input.value;
-    chrome.runtime.sendMessage(
-      { type: "tempUnlockSite", url: window.location.href, password },
-      (response) => {
-        if (response.success) {
-          overlay.remove();
-        } else {
-          alert("Incorrect password!");
-        }
+// Handle unlock
+button.addEventListener("click", () => {
+  const password = input.value;
+  chrome.runtime.sendMessage(
+    { type: "unlockSite", url: window.location.href, password },
+    (response) => {
+      if (response.success) {
+        overlay.remove();
+      } else {
+        alert("Incorrect password");
       }
-    );
-  });
-
-  overlay.appendChild(button);
-  document.body.appendChild(overlay);
-}
+    }
+  );
+});
