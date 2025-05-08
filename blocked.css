@@ -1,138 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 body {
-    font-family: Roboto, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #a5bce8, #4e085f); /* Your gradient background */
-    color: #333; /* Dark gray for text */
+    padding: 20px; /* Keep padding for content on small screens */
+    background-image: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%); /* NEW: Subtle light gray gradient */
+    color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     box-sizing: border-box;
+    line-height: 1.6;
 }
-
-/* Main container */
 .container {
-    width: 40vw;
+    width: 90%;
+    max-width: 420px; /* Optimized for a clean, focused form */
     text-align: center;
-    max-width: 600px;
-    padding: 20px;
-    background-color: white; /* Contrast for the form */
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 35px 30px; /* More vertical padding */
+    background-color: #ffffff; /* Clean white background */
+    border-radius: 12px; /* Softer, more modern border radius */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Softer, more diffused shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Shield icon styling */
-.icon-container img {
-    width: 140px;
-    margin-bottom: 20px;
+/* Optional: Subtle hover effect for the container
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+*/
+
+.icon-container {
+    margin-bottom: 25px;
 }
 
 .shield-icon {
-    width: 100px;
+    width: 80px; /* Slightly smaller for a cleaner look */
     height: auto;
+    /* Consider an SVG icon for scalability and sharpness if possible */
 }
 
-/* Heading */
 h1 {
-    font-size: 1.8rem;
-    color: #070404;
-    margin-bottom: 10px;
+    font-size: 1.6rem; /* Adjusted for 'Poppins' */
+    color: #2c3e50; /* Deep, neutral blue/grey */
+    font-weight: 600; /* Bolder for heading */
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 
-/* Description text */
-.description {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.description a {
-    color: #4a90e2;
-    text-decoration: none;
-}
-
-.description a:hover {
-    text-decoration: underline;
-}
-
-/* Form styling */
-form {
-    margin-bottom: 20px;
+#unlockForm {
+    margin-top: 20px; /* Space between heading and form */
     width: 100%;
 }
 
-/* Input fields */
-form input[type="password"], 
-form input[type="url"] {
-    width: 80%; /* Consistent width for inputs */
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-form input[type="password"]:focus, 
-form input[type="url"]:focus {
-    border-color: #4a90e2; /* Highlight on focus */
-    outline: none;
-}
-
-/* Form button */
-form button {
-    padding: 10px 20px;
-    background-color: #007bff; /* Blue for action button */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-
-form button:hover {
-    background-color: #0056b3;
-}
-
-/* Unlock status message */
-#unlockStatus {
-    margin-top: 10px;
+#unlockForm label {
+    display: block;
     font-size: 0.9rem;
-    color: red; /* Error status color */
+    color: #555e68; /* Softer label color */
+    font-weight: 500; /* Medium weight for labels */
+    margin-bottom: 8px;
+    text-align: left;
 }
 
-/* Additional Buttons */
-.buttons {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px; /* Space between buttons */
+#unlockForm input[type="password"] {
+    width: 100%;
+    padding: 14px 16px; /* More padding for a modern feel */
+    margin-bottom: 25px; /* Increased space before button */
+    border: 1px solid #dbe2e8; /* Lighter border color */
+    border-radius: 8px; /* Consistent rounded corners */
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fdfdff; /* Slightly off-white input background */
 }
 
-.buttons button {
-    padding: 10px 20px;
-    background-color: #007bff;
+#unlockForm input[type="password"]:focus {
+    border-color: #007aff; /* Vibrant blue for focus */
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15); /* Softer focus ring */
+    outline: none;
+    background-color: #fff;
+}
+
+#unlockForm button[type="submit"] {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: #007aff; /* Primary action blue */
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2); /* Subtle shadow for button */
 }
 
-.buttons button:hover {
-    background-color: #0056b3;
+#unlockForm button[type="submit"]:hover {
+    background-color: #005ecb; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
 }
 
-/* Footer styling */
-footer {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    color: #666;
+#unlockForm button[type="submit"]:active {
+    transform: translateY(0); /* Reset lift on active */
+    background-color: #004a9e;
+}
+
+#unlockStatus {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    min-height: 1.3em; /* Prevent layout jumps */
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: none; /* Hidden by default, shown via JS */
+}
+
+#unlockStatus.error {
+    color: #c0392b; /* Stronger red for error text */
+    background-color: #fdecea; /* Light red background for error */
+    border: 1px solid #f5c6cb; /* Border for error message */
+    display: block; /* Show when error class is present */
+}
+
+#unlockStatus.success {
+    color: #27ae60; /* Green for success text */
+    background-color: #eaf7f0; /* Light green background for success */
+    border: 1px solid #c3e6cb; /* Border for success message */
+    display: block; /* Show when success class is present */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 25px 20px;
+        margin: 15px; /* Ensure some margin on very small screens */
+        border-radius: 10px; /* Slightly less rounded on mobile if preferred */
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    #unlockForm input[type="password"],
+    #unlockForm button[type="submit"] {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+
+    .shield-icon {
+        width: 70px;
+    }
 }
