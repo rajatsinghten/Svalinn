@@ -7,20 +7,43 @@
   <title>User Registration</title>
 </head>
 <body>
-  <h1>User Registration</h1>
-  <form id="registration-form">
-    <label for="name">Name</label>
-    <input type="text" id="name" placeholder="Enter your name" required>
+    <div class="registration-container"> <img src="icon.png" alt="SECUREOPS Icon" class="registration-icon"> <h1>User Registration</h1>
+        <form id="registration-form">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required>
 
-    <label for="designation">Email</label>
-    <input type="text" id="designation" placeholder="Enter your Email" required>
+          <label for="email">Email</label> <input type="email" id="email" placeholder="Enter your Email" required> <label for="master-password">Master Password</label>
+          <input type="password" id="master-password" placeholder="Enter your master password" required>
 
-    <label for="master-password">Master Password</label>
-    <input type="password" id="master-password" placeholder="Enter your master password" required>
+          <p class="security-note">For potential account recovery (use with caution):</p> <label for="security-question1">Security Question 1</label>
+          <select id="security-question1" required>
+              <option value="">Select a question</option>
+              <option value="pet">What was the name of your first pet?</option>
+              <option value="mother">What is your mother's maiden name?</option>
+              <option value="city">In which city were you born?</option>
+              <option value="car">What was the make of your first car?</option>
+              <option value="book">What is your favorite book?</option>
+          </select>
 
-    <button type="submit">Register</button>
-  </form>
+          <label for="security-answer1">Answer 1</label>
+          <input type="text" id="security-answer1" placeholder="Enter your answer" required>
 
-  <script src="registration.js"></script>
-</body>
+          <label for="security-question2">Security Question 2</label>
+          <select id="security-question2" required>
+               <option value="">Select a question</option>
+               <option value="school">What was the name of your first school?</option>
+               <option value="street">What was the name of the street you grew up on?</option>
+               <option value="job">What was the name of your first job?</option>
+               <option value="food">What is your favorite food?</option>
+               <option value="movie">What is your favorite movie?</option>
+          </select>
+
+          <label for="security-answer2">Answer 2</label>
+          <input type="text" id="security-answer2" placeholder="Enter your answer" required>
+
+          <button type="submit">Register</button>
+        </form>
+    </div>
+
+  <script src="registration.js"></script> </body>
 </html>

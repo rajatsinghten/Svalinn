@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+.welcome-container {
+    width: 90%;
+    max-width: 500px;
+    /* text-align: center; /* REMOVED - Will set text-align: left below */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items like icon and button block */
+
+    text-align: left; /* ADDED - Align text inside the container to the left */
+}
+
+.welcome-icon {
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px;
+    /* If you want the icon left-aligned too, you might need to adjust align-items in container
+       and remove margin: auto; */
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center; /* Keep heading centered */
+    width: 100%; /* Allow h1 to take full width for centering */
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #555;
+    /* text-align: left; /* Inherits from container */
+    width: 100%; /* Ensure paragraphs take full width */
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: disc;
+    /* text-align: left; /* REMOVED - Inherits from container */
+    margin: 20px 0; /* Adjusted margin - remove auto */
+    padding-left: 25px; /* Keep indentation for list items */
+    width: 100%; /* Allow list block to take full width */
+    max-width: 100%; /* Ensure it doesn't restrict itself unnecessarily */
+    color: #555;
+    box-sizing: border-box;
+}
+
+li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+#agree-button {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    margin: 25px auto 0; /* Keep button centered as a block */
+    padding: 12px 20px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2);
+}
+
+#agree-button:hover {
+    background-color: #005ecb;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 122, 255, 0.25);
+}
+
+#agree-button:active {
+    transform: translateY(0);
+    background-color: #004a9e;
+    box-shadow: 0 2px 5px rgba(0, 122, 255, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 550px) {
+    .welcome-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    p, li {
+        font-size: 0.9rem;
+    }
+
+    ul {
+        padding-left: 20px; /* Adjust padding if needed on small screens */
+    }
+
+    #agree-button {
+        width: 90%;
+        font-size: 1rem;
+    }
+}

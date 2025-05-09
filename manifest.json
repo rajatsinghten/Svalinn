@@ -33,7 +33,7 @@
     },
     "web_accessible_resources": [
       {
-        "resources": ["registration.html", "blocked.html"],
+        "resources": ["registration.html", "blocked.html","welcome.html"],
         "matches": ["<all_urls>"]
       }
     ]
