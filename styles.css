@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 body{
     background-color: #f9f9f9;
     margin: 0;
     padding: 20px;
     width: 400px;
-  
-    font-family: 'Roboto', sans-serif;
+    background-image: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     color: #150b0b; /* White text color for contrast */
@@ -13,6 +15,8 @@ body{
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    line-height: 1.6;
+    border-radius: 12px;
     }
   .heading{
     display: flex;
@@ -20,7 +24,8 @@ body{
     align-items: center;
   }
   .heading img{
-    width: 20%;
+    width: 15%;
+    padding-right: 5px;
   }
     
     h1 {
@@ -61,28 +66,38 @@ body{
     }
     
   
-    form button {
-      width: 50%;
-      padding: 10px 15px;
-      margin-top: 10px;
-      background: #007bff;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-  
-    form button:hover {
-      background: #0288d1; /* Darker blue on hover */
-    }
+    form button[type="submit"] {
+    width: 100%; /* Button takes full width of form */
+    padding: 10px 15px; /* Slightly reduced button padding */
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2);
+}
+
+form button[type="submit"]:hover {
+    background-color: #005ecb;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 11px rgba(0, 122, 255, 0.25); /* Slightly adjusted shadow */
+}
+
+form button[type="submit"]:active {
+    transform: translateY(0);
+    background-color: #004a9e;
+    box-shadow: 0 2px 5px rgba(0, 122, 255, 0.2);
+}
+
   
     #show-locked {
       padding: 10px 15px;
       margin-top: 20px;
-      background: #007bff; 
+      background: #df0850; 
       color: white;
       font-size: 1rem;
       font-weight: bold;
@@ -93,7 +108,7 @@ body{
     }
   
     #show-locked:hover {
-      background: #0019f5; /* Darker orange on hover */
+      background: #6b0627; /* Darker orange on hover */
     }
   
     #locked-sites-list {

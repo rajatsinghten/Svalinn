@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "SecureOps",
+    "name": "Svalinn",
     "version": "1.0",
     "description": "Lock and secure websites with a master password",
     "permissions": [
