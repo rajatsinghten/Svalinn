@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <img src="icon.png" alt="User Icon" class="dashboard-icon">
+    <h1>User Dashboard</h1>
+
+    <div class="user-info">
+      <p><strong><i class="fas fa-user"></i> Name:</strong> <span id="user-name">Loading...</span></p>
+      <p><strong><i class="fas fa-envelope"></i> Email:</strong> <span id="user-email">Loading...</span></p>
+    </div>
+
+    <hr>
+
+    <h2>Change Master Password</h2>
+    <form id="change-password-form">
+      <label for="old-password">Current Master Password</label>
+      <input type="password" id="old-password" required>
+
+      <label for="new-password">New Master Password</label>
+      <input type="password" id="new-password" required>
+
+      <button type="submit">Change Password</button>
+    </form>
+
+    <hr>
+
+    <h2>Forgot Master Password?</h2>
+    <form id="recovery-form">
+      <label id="question1-label"></label>
+      <input type="text" id="answer1" placeholder="Answer 1" required>
+
+      <label id="question2-label"></label>
+      <input type="text" id="answer2" placeholder="Answer 2" required>
+
+      <button type="submit">Recover Password</button>
+    </form>
+
+    <p id="recovery-result" class="recovery-result"></p>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
