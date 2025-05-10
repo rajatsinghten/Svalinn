@@ -1,4 +1,21 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+    const registeredView = document.getElementById("registered-view");
+    const notRegisteredView = document.getElementById("not-registered-view");
+
+    const { masterPassword } = await chrome.storage.local.get("masterPassword");
+
+    if (!masterPassword) {
+        // Show register prompt, hide main UI
+        notRegisteredView.style.display = "block";
+        registeredView.style.display = "none";
+        return; // Stop further execution
+    }
+
+    // Show main UI if registered
+    registeredView.style.display = "block";
+    notRegisteredView.style.display = "none";
+
+    // Get references for the registered view's logic
     const lockForm = document.getElementById("lockForm");
     const websiteInput = document.getElementById("website");
     const statusMessage = document.getElementById("status");
