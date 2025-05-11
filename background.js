@@ -2,7 +2,7 @@
 
 // Open the welcome page upon installation IF the user is not already registered
 chrome.runtime.onInstalled.addListener(() => {
-  // Check if the 'isRegistered' flag exists in local storage
+  // Check if the 'isRegistered' flag exists in the local storage
   chrome.storage.local.get('isRegistered', (data) => {
     if (chrome.runtime.lastError) {
       console.error("Error checking registration status:", chrome.runtime.lastError);
