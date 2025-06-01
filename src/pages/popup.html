@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Locker</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script src="../js/popup/popup.js" defer></script>
+</head>
+<body>
+
+  <div id="registered-view" style="display: none; margin-left:30px ;margin-right:0px">
+    <div class="heading" style="margin-right:30px;">
+      <img src="../assets/icon.png" alt="Svalinn logo">
+      <h1 >Svalinn</h1>
+      <a style="margin-left:130px" href="../pages/dashboard.html" target="_blank" ><img src="../assets/user.png" alt="Svalinn logo" style=" width:95%" "></a>
+    </div>
+
+    <form id="lockForm">
+      <label for="website">Website URL</label>
+      <input type="url" id="website" placeholder="Enter website URL" required />
+      <button type="submit">Lock Website</button>
+    </form>
+
+    <button id="show-locked">Show Locked Websites</button>
+
+    <div id="locked-sites-list" style="display: none;">
+      <h3>Locked Websites:</h3>
+      <ul id="locked-sites"></ul>
+    </div>
+
+    <p id="status"></p>
+  </div>
+
+
+  <div id="not-registered-view" style="display: none ; text-align: center; padding: 20px;">
+  
+    <div class="heading" style="margin-bottom: 15px;">
+      <img src="../assets/icon.png" alt="Svalinn logo" style="width: 30px; margin-right: 10px;">
+      <h1 style="margin: 0; font-size: 1.8rem;">Svalinn</h1>
+    </div>
+    <div style="max-width: 350px; margin: auto; background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    
+    <h2 style="margin-bottom: 10px;">Welcome!!!</h2>
+    <p style="margin-bottom: 20px;">Please register before using the extension.</p>
+    
+    <a href="../pages/welcome.html" target="_blank" 
+       style="color: #007bff; font-weight: bold; text-decoration: none; padding: 10px 20px; background: white; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); display: inline-block;">
+      Register Now
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

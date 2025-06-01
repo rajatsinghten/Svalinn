@@ -9,7 +9,7 @@ body{
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: #150b0b; /* White text color for contrast */
+    color: #150b0b;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,7 +43,7 @@ body{
       align-items: center;
       width: 80%;
       max-width: 400px;
-      background: rgba(255, 255, 255, 0.2); /* Slight transparency for the form */
+      background: rgba(255, 255, 255, 0.2); 
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -67,8 +67,8 @@ body{
     
   
     form button[type="submit"] {
-    width: 100%; /* Button takes full width of form */
-    padding: 10px 15px; /* Slightly reduced button padding */
+    width: 100%; 
+    padding: 10px 15px; 
     background-color: #007aff;
     color: white;
     border: none;
@@ -84,7 +84,7 @@ body{
 form button[type="submit"]:hover {
     background-color: #005ecb;
     transform: translateY(-1px);
-    box-shadow: 0 5px 11px rgba(0, 122, 255, 0.25); /* Slightly adjusted shadow */
+    box-shadow: 0 5px 11px rgba(0, 122, 255, 0.25); 
 }
 
 form button[type="submit"]:active {
@@ -108,7 +108,7 @@ form button[type="submit"]:active {
     }
   
     #show-locked:hover {
-      background: #6b0627; /* Darker orange on hover */
+      background: #6b0627;
     }
   
     #locked-sites-list {
@@ -116,7 +116,7 @@ form button[type="submit"]:active {
       width: 80%;
       max-width: 400px;
       text-align: center;
-      background: rgba(255, 255, 255, 0.2); /* Slight transparency for contrast */
+      background: rgba(255, 255, 255, 0.2); 
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -143,7 +143,7 @@ form button[type="submit"]:active {
     #status {
       margin-top: 10px;
       font-size: 1rem;
-      color: #ffcccb; /* Light red for status messages */
+      color: #ffcccb; 
       text-align: center;
     }
   
@@ -181,24 +181,3 @@ form button[type="submit"]:active {
       padding: 5px;
     }
   
-    
-    /* input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-    
-    #lockForm button{
-      justify-content: center;
-    }
-  
-    #lockForm input{
-      left: 0;
-      width: 90%;
-    }
-  
-    #locked-sites{
-  
-    } */

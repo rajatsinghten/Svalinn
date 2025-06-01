@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-  // Recover master password
   document.getElementById("recovery-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const { securityAnswer1, securityAnswer2, masterPassword } = await chrome.storage.local.get([

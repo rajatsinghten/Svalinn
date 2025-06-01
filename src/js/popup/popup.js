@@ -5,17 +5,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { masterPassword } = await chrome.storage.local.get("masterPassword");
 
     if (!masterPassword) {
-        // Show register prompt, hide main UI
         notRegisteredView.style.display = "block";
         registeredView.style.display = "none";
-        return; // Stop further execution
+        return; 
     }
 
-    // Show main UI if registered
     registeredView.style.display = "block";
     notRegisteredView.style.display = "none";
 
-    // Get references for the registered view's logic
+
     const lockForm = document.getElementById("lockForm");
     const websiteInput = document.getElementById("website");
     const statusMessage = document.getElementById("status");
@@ -23,18 +21,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     const lockedSitesList = document.getElementById("locked-sites");
     const lockedSitesContainer = document.getElementById("locked-sites-list");
 
-    // Handle form submission to lock a new website
+
     lockForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const website = websiteInput.value.trim();
 
         if (website) {
-            const normalizedUrl = new URL(website).origin; // Normalize to the origin (e.g., https://example.com)
+            const normalizedUrl = new URL(website).origin; 
             const { lockedSites } = await chrome.storage.local.get("lockedSites");
             const lockedSitesList = lockedSites || [];
 
-            // Add the website to the locked list if it's not already there
+  
             if (!lockedSitesList.includes(normalizedUrl)) {
                 lockedSitesList.push(normalizedUrl);
                 await chrome.storage.local.set({ lockedSites: lockedSitesList });
@@ -43,32 +41,31 @@ document.addEventListener("DOMContentLoaded", async () => {
                 statusMessage.textContent = "Website is already locked.";
             }
 
-            websiteInput.value = ""; // Clear the input field
+            websiteInput.value = ""; 
         } else {
             alert("Please enter a valid website URL!");
         }
     });
 
-    // Handle button click to show locked websites
+  
     showLockedButton.addEventListener("click", async () => {
         const { lockedSites } = await chrome.storage.local.get("lockedSites");
         const lockedSitesListData = lockedSites || [];
 
-        // Clear the existing list
+       
         lockedSitesList.innerHTML = "";
 
         if (lockedSitesListData.length > 0) {
-            // Populate the list with locked websites
+          
             lockedSitesListData.forEach((site) => {
                 const listItem = document.createElement("li");
                 listItem.textContent = site;
 
-                // Add a remove button for each site
+              
                 const removeButton = document.createElement("button");
                 removeButton.textContent = "Remove";
                 removeButton.style.marginLeft = "10px";
                 removeButton.addEventListener("click", async () => {
-                    // Prompt for the master password with a hidden input
                     const passwordInput = document.createElement("input");
                     passwordInput.type = "password";
                     passwordInput.placeholder = "Enter master password";
@@ -99,17 +96,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                         const { masterPassword } = await chrome.storage.local.get("masterPassword");
                         if (enteredPassword === masterPassword) {
-                            // Remove the website from the locked list
                             const updatedLockedSites = lockedSitesListData.filter((lockedSite) => lockedSite !== site);
                             await chrome.storage.local.set({ lockedSites: updatedLockedSites });
 
                             alert("Website removed successfully!");
-                            showLockedButton.click(); // Refresh the list
+                            showLockedButton.click();
                         } else {
                             alert("Incorrect master password. Unable to remove the website.");
                         }
 
-                        // Remove the password input and confirm button
+
                         passwordContainer.remove();
                     });
                 });
@@ -118,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 lockedSitesList.appendChild(listItem);
             });
 
-            // Show the container
+            
             lockedSitesContainer.style.display = "block";
         } else {
             alert("No locked websites found.");

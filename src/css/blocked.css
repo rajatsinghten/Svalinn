@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%); 
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+.container {
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    padding: 35px 30px; 
+    background-color: #ffffff; 
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.icon-container {
+    margin-bottom: 25px;
+}
+
+.shield-icon {
+    width: 80px; 
+    height: auto;
+    
+}
+
+h1 {
+    font-size: 1.6rem; 
+    color: #2c3e50; 
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#unlockForm {
+    margin-top: 20px;
+    width: 100%;
+}
+
+#unlockForm label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555e68;
+    font-weight: 500; 
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+#unlockForm input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 25px; 
+    border: 1px solid #dbe2e8;
+    border-radius: 8px; 
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fdfdff;
+}
+
+#unlockForm input[type="password"]:focus {
+    border-color: #007aff; 
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15); 
+    outline: none;
+    background-color: #fff;
+}
+
+#unlockForm button[type="submit"] {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2);
+}
+
+#unlockForm button[type="submit"]:hover {
+    background-color: #005ecb; 
+    transform: translateY(-2px); 
+}
+
+#unlockForm button[type="submit"]:active {
+    transform: translateY(0); 
+    background-color: #004a9e;
+}
+
+#unlockStatus {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    min-height: 1.3em;
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: none; 
+}
+#unlockStatus.error {
+    color: #c0392b; 
+    background-color: #fdecea; 
+    border: 1px solid #f5c6cb; 
+    display: block; 
+}
+
+#unlockStatus.success {
+    color: #27ae60;
+    background-color: #eaf7f0; 
+    border: 1px solid #c3e6cb; 
+    display: block; 
+}
+
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 25px 20px;
+        margin: 15px; 
+        border-radius: 10px; 
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    #unlockForm input[type="password"],
+    #unlockForm button[type="submit"] {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+
+    .shield-icon {
+        width: 70px;
+    }
+}

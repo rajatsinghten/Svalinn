@@ -16,24 +16,24 @@
       "<all_urls>"
     ],
     "background": {
-      "service_worker": "background.js"
+      "service_worker": "src/js/background/background.js"
     },
     "action": {
-      "default_popup": "popup.html",
+      "default_popup": "src/pages/popup.html",
       "default_icon": {
-        "16": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png"
+        "16": "src/assets/icon.png",
+        "48": "src/assets/icon.png",
+        "128": "src/assets/icon.png"
       }
     },
     "icons": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
+      "16": "src/assets/icon.png",
+      "48": "src/assets/icon.png",
+      "128": "src/assets/icon.png"
     },
     "web_accessible_resources": [
       {
-        "resources": ["registration.html", "blocked.html","welcome.html"],
+        "resources": ["src/pages/registration.html", "src/pages/blocked.html", "src/pages/welcome.html"],
         "matches": ["<all_urls>"]
       }
     ]
