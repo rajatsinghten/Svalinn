@@ -1,6 +1,6 @@
-# For SecureXHackathon
 
-## Svalinn: Website Locker Extension
+
+# Svalinn: Website Locker Extension
 
 Svalinn is a browser extension designed to help users secure their Browse by allowing them to lock access to specific websites with a master password.
 
