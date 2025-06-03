@@ -180,4 +180,25 @@ form button[type="submit"]:active {
     li {
       padding: 5px;
     }
-  
+
+.profile-icon-link {
+  display: inline-block;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+  margin-left: 60px;
+  width: 80px;
+  height: 60px;
+}
+
+.profile-icon {
+  cursor: pointer;
+  width: 80px;
+  height: 60px;
+  object-fit: fill;
+  object-position: center;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
