@@ -9,41 +9,125 @@
 </head>
 <body>
   <div class="dashboard-container">
-    <img src="../assets/icon.png" alt="User Icon" class="dashboard-icon">
-    <h1>User Dashboard</h1>
-
-    <div class="user-info">
-      <p><strong><i class="fas fa-user"></i> Name:</strong> <span id="user-name">Loading...</span></p>
-      <p><strong><i class="fas fa-envelope"></i> Email:</strong> <span id="user-email">Loading...</span></p>
+    <div class="dashboard-header">
+      <div class="user-profile">
+        <img src="../assets/user.png" alt="User Avatar" class="user-avatar">
+        <div>
+          <h2>Welcome, <span id="user-name">Loading...</span></h2>
+          <p id="user-email">Loading...</p>
+        </div>
+      </div>
+      <div class="security-status">
+        <div class="password-strength">
+          <span>Password Strength:</span>
+          <div class="strength-meter">
+            <div class="strength-meter fill"></div>
+          </div>
+          <span>Strong</span>
+        </div>
+      </div>
     </div>
 
-    <hr>
+    <div class="dashboard-grid">      <div class="dashboard-card">
+        <div class="card-header">
+          <div>
+            <i class="fas fa-lock"></i>
+            <h3>Password Management</h3>
+          </div>
+        </div>
+        <div class="password-management">
+          <p class="card-description">Update your master password to keep your account secure.</p>
+          <form id="change-password-form">
+            <div class="input-group">
+              <label for="old-password">Current Master Password</label>              <div class="input-wrapper">
+                <i class="fas fa-key input-icon"></i>
+                <input type="password" id="old-password" placeholder="Enter current password" required>
+                <button type="button" class="toggle-password" data-target="old-password" title="Toggle password visibility">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="input-group">
+              <label for="new-password">New Master Password</label>              <div class="input-wrapper">
+                <i class="fas fa-lock-open input-icon"></i>
+                <input type="password" id="new-password" placeholder="Enter new password" required>
+                <button type="button" class="toggle-password" data-target="new-password" title="Toggle password visibility">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="password-strength-indicator">
+              <div class="strength-bar">
+                <div class="strength-fill" id="strength-fill"></div>
+              </div>
+              <span class="strength-text" id="strength-text">Password strength will appear here</span>
+            </div>
+            
+            <button type="submit" class="update-password-btn">
+              <i class="fas fa-shield-alt"></i>
+              Update Master Password
+            </button>
+          </form>
+        </div>
+      </div><div class="dashboard-card">
+        <div class="card-header">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Password Recovery</h3>
+        </div>
+        
+        <div class="recovery-questions">
+          <h4>Recover Your Password</h4>
+          <form id="recovery-form">
+            <div class="question-item">
+              <i class="fas fa-question-circle"></i>
+              <span id="question1-label">Security Question 1</span>
+            </div>
+            <input type="text" id="answer1" placeholder="Answer to first question" required>
+            
+            <div class="question-item">
+              <i class="fas fa-question-circle"></i>
+              <span id="question2-label">Security Question 2</span>
+            </div>
+            <input type="text" id="answer2" placeholder="Answer to second question" required>
+            
+            <button type="submit">Recover Password</button>
+          </form>
+          <p id="recovery-result" class="recovery-result"></p>
+        </div>
+      </div><div class="dashboard-card">
+        <div class="card-header">
+          <div>
+            <i class="fas fa-globe"></i>
+            <h3>Locked Websites</h3>
+          </div>
+          <button id="refresh-websites" class="refresh-btn" title="Refresh locked websites list">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>        <div class="locked-websites-container">
+          <ul class="locked-websites-list" id="locked-websites-list">
+            <li class="no-websites">No websites locked yet</li>
+          </ul>
+        </div>
+      </div>
 
-    <h2>Change Master Password</h2>
-    <form id="change-password-form">
-      <label for="old-password">Current Master Password</label>
-      <input type="password" id="old-password" required>
-
-      <label for="new-password">New Master Password</label>
-      <input type="password" id="new-password" required>
-
-      <button type="submit">Change Password</button>
-    </form>
-
-    <hr>
-
-    <h2>Forgot Master Password?</h2>
-    <form id="recovery-form">
-      <label id="question1-label"></label>
-      <input type="text" id="answer1" placeholder="Answer 1" required>
-
-      <label id="question2-label"></label>
-      <input type="text" id="answer2" placeholder="Answer 2" required>
-
-      <button type="submit">Recover Password</button>
-    </form>
-
-    <p id="recovery-result" class="recovery-result"></p>
+      <div class="dashboard-card">
+        <div class="card-header">
+          <div>
+            <i class="fas fa-shield-virus"></i>
+            <h3>Extension Security</h3>
+          </div>
+        </div>
+        <div class="security-tip">
+          <p>Enhance your browser security by making this extension unremovable.</p>
+          <a href="https://support.google.com/chrome/a/answer/9290850" target="_blank" rel="noopener" class="security-link">
+            <i class="fas fa-external-link-alt"></i>
+            Learn how to make the extension unremovable
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="../js/dashboard/dashboard.js"></script>

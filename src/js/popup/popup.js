@@ -23,19 +23,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     lockForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const website = websiteInput.value.trim();
-
+        e.preventDefault();        const website = websiteInput.value.trim();
+        console.log('Attempting to lock website:', website);
+        
         if (website) {
             const normalizedUrl = new URL(website).origin; 
+            console.log('Normalized URL:', normalizedUrl);
+            
             const { lockedSites } = await chrome.storage.local.get("lockedSites");
             const lockedSitesList = lockedSites || [];
+            console.log('Current locked sites:', lockedSitesList);
 
-  
-            if (!lockedSitesList.includes(normalizedUrl)) {
-                lockedSitesList.push(normalizedUrl);
+            // Check if site is already locked (handle both string and object formats)
+            const isAlreadyLocked = lockedSitesList.some(site => {
+                const siteUrl = typeof site === 'string' ? site : site.url;
+                return siteUrl === normalizedUrl;
+            });
+
+            if (!isAlreadyLocked) {                // Store as object with date information
+                const siteObject = {
+                    url: normalizedUrl,
+                    dateAdded: Date.now()
+                };
+                lockedSitesList.push(siteObject);
+                console.log('Adding site object:', siteObject);
+                console.log('Updated locked sites list:', lockedSitesList);
+                
                 await chrome.storage.local.set({ lockedSites: lockedSitesList });
+                console.log('Saved to storage');
                 statusMessage.textContent = "Website locked successfully!";
             } else {
                 statusMessage.textContent = "Website is already locked.";
@@ -47,19 +62,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-  
     showLockedButton.addEventListener("click", async () => {
         const { lockedSites } = await chrome.storage.local.get("lockedSites");
         const lockedSitesListData = lockedSites || [];
+        
+        console.log('Show locked sites clicked, found:', lockedSitesListData);
 
        
-        lockedSitesList.innerHTML = "";
-
-        if (lockedSitesListData.length > 0) {
+        lockedSitesList.innerHTML = "";        if (lockedSitesListData.length > 0) {
           
             lockedSitesListData.forEach((site) => {
                 const listItem = document.createElement("li");
-                listItem.textContent = site;
+                
+                // Handle both string and object formats
+                const siteUrl = typeof site === 'string' ? site : site.url;
+                listItem.textContent = siteUrl;
 
               
                 const removeButton = document.createElement("button");
@@ -92,11 +109,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                     listItem.appendChild(passwordContainer);
 
                     confirmButton.addEventListener("click", async () => {
-                        const enteredPassword = passwordInput.value;
-
-                        const { masterPassword } = await chrome.storage.local.get("masterPassword");
+                        const enteredPassword = passwordInput.value;                        const { masterPassword } = await chrome.storage.local.get("masterPassword");
                         if (enteredPassword === masterPassword) {
-                            const updatedLockedSites = lockedSitesListData.filter((lockedSite) => lockedSite !== site);
+                            // Filter out the site (handle both string and object formats)
+                            const updatedLockedSites = lockedSitesListData.filter((lockedSite) => {
+                                const lockedSiteUrl = typeof lockedSite === 'string' ? lockedSite : lockedSite.url;
+                                return lockedSiteUrl !== siteUrl;
+                            });
                             await chrome.storage.local.set({ lockedSites: updatedLockedSites });
 
                             alert("Website removed successfully!");
