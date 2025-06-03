@@ -45,10 +45,10 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
     const lockedSitesList = lockedSites || [];
     const sessionUnlockedSites = unlockedSites || {};
     const currentUrl = new URL(details.url);
-    const currentHost = currentUrl.hostname;
-
-    const isLocked = lockedSitesList.some((siteUrl) => {
+    const currentHost = currentUrl.hostname;    const isLocked = lockedSitesList.some((site) => {
       try {
+        // Handle both string format (legacy) and object format (new)
+        const siteUrl = typeof site === 'string' ? site : site.url;
         const lockedHost = new URL(siteUrl).hostname;
         return currentHost === lockedHost;
       } catch (e) {
