@@ -5,7 +5,6 @@
     "description": "Lock and secure websites with a master password",
     "permissions": [
       "storage",
-      "history",
       "cookies",
       "browsingData",
       "webNavigation",
